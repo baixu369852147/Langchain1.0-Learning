@@ -17,6 +17,7 @@ import os
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langchain_openai import ChatOpenAI
 
 # 加载环境变量
 load_dotenv()
@@ -29,7 +30,15 @@ if not GROQ_API_KEY or GROQ_API_KEY == "your_groq_api_key_here":
     )
 
 # 初始化模型
-model = init_chat_model("groq:llama-3.3-70b-versatile", api_key=GROQ_API_KEY)
+# model = init_chat_model("groq:llama-3.3-70b-versatile", api_key=GROQ_API_KEY)
+
+# 创建智谱 LLM 实例
+model = ChatOpenAI(
+    temperature=0.6,
+    model="glm-4.5-air",
+    openai_api_key=GROQ_API_KEY,
+    openai_api_base="https://open.bigmodel.cn/api/paas/v4/"
+)
 
 # ============================================================================
 # 示例 1：最简单的 LLM 调用
