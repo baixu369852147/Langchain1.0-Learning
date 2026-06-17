@@ -80,8 +80,16 @@ print("提示：首次运行会下载 HuggingFace 模型，请稍候...")
 try:
     from langchain_huggingface import HuggingFaceEmbeddings
 
+    # embeddings = HuggingFaceEmbeddings(
+    #     model_name="sentence-transformers/all-MiniLM-L6-v2"
+    # )
+
+    # 将路径替换为你实际存放模型的本地路径
+    local_model_path = "./all-MiniLM-L6-v2"
+
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+        model_name=local_model_path,
+        model_kwargs={"device": "cuda"}  # 如果有N卡，可改为 "cuda"
     )
 
     # 嵌入测试文本
