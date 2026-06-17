@@ -96,8 +96,16 @@ try:
 
     print("创建向量存储（首次运行会下载模型）...")
 
+    # embeddings = HuggingFaceEmbeddings(
+    #     model_name="sentence-transformers/all-MiniLM-L6-v2"
+    # )
+
+    # 将路径替换为你实际存放模型的本地路径
+    local_model_path = "../13_rag_basics/all-MiniLM-L6-v2"
+
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+        model_name=local_model_path,
+        model_kwargs={"device": "cuda"}  # 如果有N卡，可改为 "cuda"
     )
 
     vectorstore = Chroma.from_documents(
